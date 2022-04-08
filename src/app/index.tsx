@@ -1,22 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+import { Form, Header } from '../Components'
 
 import './index.css'
 
 const App = () => {
+    const [data, setData] = useState<string[]>([])
+
+    const addData = (name: string) => {
+        setData([...data, name])
+    }
+
     return (
         <div className='App'>
             <header className='App-header'>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className='App-link'
-                    href='https://reactjs.org'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                >
-                    Learn React
-                </a>
+                <Header name='Contact' />
+                <Form addData={addData} />
+                <div>
+                    {data.length > 0 ? (
+                        <div>
+                            {data.map((item) => (
+                                <p>{item}</p>
+                            ))}
+                        </div>
+                    ) : (
+                        <p>No Data</p>
+                    )}
+                </div>
             </header>
         </div>
     )

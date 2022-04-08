@@ -36,3 +36,14 @@
         transform: rotate(360deg);
     }
 }
+
+.App-form {
+    display: flex;
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+.App-form input {
+    color: white !important;
+}
