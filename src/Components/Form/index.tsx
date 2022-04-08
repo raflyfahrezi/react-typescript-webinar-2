@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, ChangeEvent, FormEvent } from 'react'
 
 import { TextField, Button } from '@mui/material'
 
@@ -9,23 +9,31 @@ interface FormProps {
 const Form = ({ addData }: FormProps) => {
     const [name, setName] = useState<string>('')
 
-    const buttonOnClick = () => {
+    const formOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
         addData(name)
         setName('')
     }
 
+    const textFieldOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target
+
+        setName(value)
+    }
+
     return (
-        <div className='App-form'>
+        <form onSubmit={formOnSubmit} className='App-form'>
             <TextField
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={textFieldOnChange}
                 placeholder='Enter a name'
                 variant='filled'
             />
-            <Button variant='contained' onClick={buttonOnClick}>
+            <Button type='submit' variant='contained'>
                 Add
             </Button>
-        </div>
+        </form>
     )
 }
 
